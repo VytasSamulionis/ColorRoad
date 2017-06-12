@@ -44,6 +44,7 @@ bool Background::init()
 		}
 		_rows[i].lastBuildingIndex = 4;
 	}
+    return true;
 }
 
 void Background::update(float deltaTime, float speed)
