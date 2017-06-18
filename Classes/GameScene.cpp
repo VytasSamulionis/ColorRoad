@@ -13,6 +13,7 @@ GameScene::GameScene()
 	, _isGameOver(false)
 	, _score(0.0f)
 	, _gameOverLabel(nullptr)
+	, _gameOverCooldown(2.0f)
 {
 
 }
@@ -72,7 +73,16 @@ void GameScene::update(float deltaTime)
 	}
 	_ground->update(deltaTime);
 	_background->update(deltaTime, _ground->getSpeed());
-	if (!_player->isJumping() && !_isGameOver)
+	if (_isGameOver)
+	{
+		_gameOverCooldown -= deltaTime;
+		if (_gameOverCooldown < 0.0f)
+		{
+			_gameOverCooldown = 0.0f;
+			_continueLabel->setVisible(true);
+		}
+	}
+	else if (!_player->isJumping())
 	{
 		Color playerColor = _player->getActiveColor();
 		Color groundColor = _ground->getColorAtPosition(_player->getCubePositionX());
@@ -102,7 +112,6 @@ void GameScene::update(float deltaTime)
 				_scoreLabel = Label::createWithTTF(text, "fonts/arial.ttf", 16);
 				_scoreLabel->setPosition(origin + size * 0.5f + Vec2(0.0f, -20.0f));
 				addChild(_scoreLabel);
-				_continueLabel->setVisible(true);
 			}
 		}
 		else
@@ -118,6 +127,7 @@ void GameScene::restart()
 	_isGameOver = false;
 	_gameOverLabel->setVisible(false);
 	_continueLabel->setVisible(false);
+	_gameOverCooldown = 2.0f;
 	if (_scoreLabel)
 	{
 		_scoreLabel->removeFromParent();
@@ -138,7 +148,7 @@ void GameScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 {
 	if (_isGameOver)
 	{
-		if (EventKeyboard::KeyCode::KEY_SPACE == keyCode)
+		if (EventKeyboard::KeyCode::KEY_SPACE == keyCode && _gameOverCooldown <= 0.0f)
 		{
 			restart();
 		}

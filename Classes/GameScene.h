@@ -28,4 +28,5 @@ private:
 	cocos2d::Label* _gameOverLabel;
 	cocos2d::Label* _scoreLabel;
 	cocos2d::Label* _continueLabel;
+	float _gameOverCooldown;
 };
