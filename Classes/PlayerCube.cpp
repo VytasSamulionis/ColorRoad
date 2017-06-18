@@ -26,14 +26,13 @@ void PlayerCube::jump()
 	if (!_isJumping)
 	{
 		_isJumping = true;
-		_healthIndicator->setVisible(false);
 		auto jump = JumpBy::create(1.0f, Vec2::ZERO, 60.0f, 1);
 		auto callback = CallFunc::create([&]() {
 			_isJumping = false;
 			_hasLanded = true;
-			_healthIndicator->setVisible(true);
 		});
 		_cube->runAction(Sequence::createWithTwoActions(jump, callback));
+		_healthIndicator->runAction(jump->clone());
 	}
 }
 
@@ -60,10 +59,7 @@ void PlayerCube::switchSide(CubeSide side)
 		_healthIndicator->setVisible(false);
 		auto rotate = RotateBy::create(0.1f, deltaAngle);
 		auto callback = CallFunc::create([&]() {
-			if (!_isJumping)
-			{
-				_healthIndicator->setVisible(true);
-			}
+			_healthIndicator->setVisible(true);
 		});
 		_cube->runAction(Sequence::createWithTwoActions(rotate, callback));
 	}
