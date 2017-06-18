@@ -43,6 +43,9 @@ bool GameScene::init()
 	_player->setPosition(Vec2(size.width * 0.3f, _ground->getMinSegmentSize().height * 2.0f));
 	addChild(_player);
 
+	_ground->setPlayerPositionX(_player->getCubePositionX());
+	_ground->setPlayerSizeX(_player->getCubeWidth());
+
 	_gameOverLabel = Label::createWithTTF("Game Over", "fonts/arial.ttf", 20);
 	_gameOverLabel->setPosition(origin + size * 0.5f);
 	addChild(_gameOverLabel);
@@ -73,8 +76,19 @@ void GameScene::update(float deltaTime)
 	{
 		Color playerColor = _player->getActiveColor();
 		Color groundColor = _ground->getColorAtPosition(_player->getCubePositionX());
+		if (groundColor == Color::COLOR_NONE)
+		{
+			_player->damage(MAX_HEALTH);
+			_player->setLandingProcessed();
+			_player->runAction(MoveBy::create(0.5f, Vec2(-_ground->getSpeed() * 0.5, -(_ground->getMinSegmentSize().height * 2.0f + _player->getCubeHeight()))));
+		}
 		if (playerColor != groundColor)
 		{
+			if (_player->hasLanded())
+			{
+				_player->damage(MAX_HEALTH * 0.5f);
+				_player->setLandingProcessed();
+			}
 			_player->damage(39.0f * deltaTime);
 			if (_player->isDead())
 			{
@@ -94,6 +108,7 @@ void GameScene::update(float deltaTime)
 		else
 		{
 			_player->heal(20.0f * deltaTime);
+			_player->setLandingProcessed();
 		}
 	}
 }
@@ -115,6 +130,8 @@ void GameScene::restart()
 		_player->switchSide(PlayerCube::SIDE_RIGHT);
 	}
 	_player->heal(MAX_HEALTH);
+	_player->stopAllActions();
+	_player->setPosition(Vec2(Director::getInstance()->getVisibleSize().width * 0.3f, _ground->getMinSegmentSize().height * 2.0f));
 }
 
 void GameScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)

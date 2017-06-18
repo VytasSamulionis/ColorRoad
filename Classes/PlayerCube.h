@@ -21,6 +21,8 @@ public:
 	void jump();
 	void switchSide(CubeSide side);
 	float getCubePositionX() const;
+	float getCubeHeight() const;
+	float getCubeWidth() const;
 	Color getActiveColor() const;
 	void damage(float power);
 	void heal(float power);
@@ -28,6 +30,8 @@ public:
 	inline float getHealth() const { return _health; }
 	inline bool isDead() const { return _health <= 0.0f; }
 	inline bool isJumping() const { return _isJumping; }
+	inline bool hasLanded() const { return _hasLanded; }
+	inline void setLandingProcessed() { _hasLanded = false; }
 
 	CREATE_FUNC(PlayerCube);
 
@@ -42,4 +46,5 @@ private:
 	cocos2d::Sprite* _healthIndicator;
 	float _health;
 	bool _isJumping;
+	bool _hasLanded;
 };

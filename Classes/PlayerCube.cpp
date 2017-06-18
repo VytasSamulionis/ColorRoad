@@ -30,6 +30,7 @@ void PlayerCube::jump()
 		auto jump = JumpBy::create(1.0f, Vec2::ZERO, 60.0f, 1);
 		auto callback = CallFunc::create([&]() {
 			_isJumping = false;
+			_hasLanded = true;
 			_healthIndicator->setVisible(true);
 		});
 		_cube->runAction(Sequence::createWithTwoActions(jump, callback));
@@ -71,6 +72,16 @@ void PlayerCube::switchSide(CubeSide side)
 float PlayerCube::getCubePositionX() const
 {
 	return getPositionX() + _cube->getContentSize().width * 0.5f;
+}
+
+float PlayerCube::getCubeHeight() const
+{
+	return _cube->getContentSize().height;
+}
+
+float PlayerCube::getCubeWidth() const
+{
+	return _cube->getContentSize().width;
 }
 
 Color PlayerCube::getActiveColor() const
@@ -117,6 +128,7 @@ PlayerCube::PlayerCube()
 	, _healthIndicator(nullptr)
 	, _health(MAX_HEALTH)
 	, _isJumping(false)
+	, _hasLanded(false)
 {
 	auto spriteFrameCache = SpriteFrameCache::getInstance();
 	spriteFrameCache->addSpriteFramesWithFile("textures/sprites.plist");

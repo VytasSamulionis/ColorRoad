@@ -14,6 +14,7 @@ public:
 	~Ground();
 
 	inline void setPlayerPositionX(float position) { _playerPositionX = position; }
+	inline void setPlayerSizeX(float size) { _playerSizeX = size; }
 
 	void reset();
 	void update(float deltaTime);
@@ -30,4 +31,6 @@ private:
 	float _speed;
 	float _acceleration;
 	float _playerPositionX;
+	float _playerSizeX;
+	float _gapSize;
 };

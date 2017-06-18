@@ -7,6 +7,8 @@ Ground::Ground(Scene& scene)
 	, _speed(10.0f)
 	, _acceleration(2.0f)
 	, _playerPositionX(0.0f)
+	, _playerSizeX(0.0f)
+	, _gapSize(0.0f)
 {
 	for (int i = 0; i < MAX_GROUND_SEGMENTS; ++i)
 	{
@@ -32,6 +34,7 @@ void Ground::reset()
 	}
 	_lastSegmentIndex = MAX_GROUND_SEGMENTS - 1;
 	_speed = 10.0f;
+	_gapSize = 0.0f;
 }
 
 void Ground::update(float deltaTime)
@@ -71,16 +74,30 @@ Size Ground::getMinSegmentSize() const
 
 void Ground::repositionSegment(GroundSegment& segment)
 {
-	float newPosition = _groundSegments[_lastSegmentIndex].getPositionX() + _groundSegments[_lastSegmentIndex].getWidth();
+	float newPosition = _groundSegments[_lastSegmentIndex].getPositionX() + _groundSegments[_lastSegmentIndex].getWidth() + _gapSize;
 	segment.resize(1, 1);
 	int color = RandomHelper::random_int<int>(1, 2);
 	segment.setColor((Color)color);
-	segment.setPositionX(newPosition);
+	if (_gapSize < 0.0001f && rand_0_1() > 0.75f)	// should we make a gap
+	{
+		_gapSize = getGapSize(newPosition);
+		if (_gapSize < segment.getWidth())
+		{
+			_gapSize = 0.0f;
+		}
+	}
+	else
+	{
+		_gapSize = 0.0f;
+	}
+	segment.setPositionX(newPosition + _gapSize);
 }
 
 float Ground::getGapSize(float gapPositionX) const
 {
 	float travelDistance = gapPositionX - _playerPositionX;
-	//float 
-	return 0.0f;
+	float timeToTravel = (-_speed + sqrtf(pow(_speed, 2) + 2 * _acceleration * travelDistance)) / _acceleration;
+	float speedAtGapStart = _speed + timeToTravel * _acceleration;
+	float gapSize = (_acceleration * 1.0f) * 0.5f + speedAtGapStart * 1.0f;
+	return gapSize - _playerSizeX;
 }
