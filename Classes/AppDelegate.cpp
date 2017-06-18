@@ -58,7 +58,11 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
-        glview = GLViewImpl::createWithRect("ColorRoad", cocos2d::Rect(0, 0, 1600, 900));
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
+		glview = GLViewImpl::createWithRect("ColorRoad", cocos2d::Rect(0, 0, 1600, 900));
+#else
+		glview = GLViewImpl::create("ColorRoad");
+#endif
         director->setOpenGLView(glview);
     }
 

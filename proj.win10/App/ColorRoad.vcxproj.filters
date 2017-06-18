@@ -31,7 +31,22 @@
     <ClCompile Include="..\..\Classes\AppDelegate.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Classes\HelloWorldScene.cpp">
+    <ClCompile Include="..\..\Classes\Background.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Classes\GameScene.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Classes\Ground.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Classes\GroundSegment.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Classes\GroundSegmentSkin.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Classes\PlayerCube.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -48,7 +63,25 @@
     <ClInclude Include="..\..\Classes\AppDelegate.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Classes\HelloWorldScene.h">
+    <ClInclude Include="..\..\Classes\Background.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Classes\Color.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Classes\GameScene.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Classes\Ground.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Classes\GroundSegment.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Classes\GroundSegmentSkin.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Classes\PlayerCube.h">
       <Filter>Classes</Filter>
     </ClInclude>
   </ItemGroup>
@@ -59,14 +92,15 @@
     <None Include="ColorRoad_TemporaryKey.pfx" />
     <None Include="$(AngleBinPath)libEGL.dll" />
     <None Include="$(AngleBinPath)libGLESv2.dll" />
-    <None Include="$(ZLibBinPath)zlib.dll" />
     <None Include="$(SQLiteBinPath)sqlite3.dll" />
-    <None Include="$(OggBinPath)libogg.dll" />
-    <None Include="$(OggBinPath)libvorbis.dll" />
-    <None Include="$(OggBinPath)libvorbisfile.dll" />
     <None Include="$(CurlBinPath)libcurl.dll" />
-    <None Include="$(CurlBinPath)libeay32.dll" />
-    <None Include="$(CurlBinPath)ssleay32.dll" />
+    <None Include="$(ZLibBinPath)zlib1.dll" />
+    <None Include="$(OpenSSLBinPath)libeay32.dll" />
+    <None Include="$(OpenSSLBinPath)ssleay32.dll" />
+    <None Include="$(OggBinPath)ogg.dll" />
+    <None Include="$(OggBinPath)vorbis.dll" />
+    <None Include="$(OggBinPath)vorbisfile.dll" />
+    <None Include="$(WebsocketsBinPath)websockets.dll" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Cocos2dEngine\OpenGLESPage.xaml">

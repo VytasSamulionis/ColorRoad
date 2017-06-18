@@ -219,7 +219,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Classes\AppDelegate.h" />
-    <ClInclude Include="..\..\Classes\HelloWorldScene.h" />
+    <ClInclude Include="..\..\Classes\Background.h" />
+    <ClInclude Include="..\..\Classes\Color.h" />
+    <ClInclude Include="..\..\Classes\GameScene.h" />
+    <ClInclude Include="..\..\Classes\Ground.h" />
+    <ClInclude Include="..\..\Classes\GroundSegment.h" />
+    <ClInclude Include="..\..\Classes\GroundSegmentSkin.h" />
+    <ClInclude Include="..\..\Classes\PlayerCube.h" />
     <ClInclude Include="App.xaml.h">
       <DependentUpon>App.xaml</DependentUpon>
     </ClInclude>
@@ -243,7 +249,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Classes\AppDelegate.cpp" />
-    <ClCompile Include="..\..\Classes\HelloWorldScene.cpp" />
+    <ClCompile Include="..\..\Classes\Background.cpp" />
+    <ClCompile Include="..\..\Classes\GameScene.cpp" />
+    <ClCompile Include="..\..\Classes\Ground.cpp" />
+    <ClCompile Include="..\..\Classes\GroundSegment.cpp" />
+    <ClCompile Include="..\..\Classes\GroundSegmentSkin.cpp" />
+    <ClCompile Include="..\..\Classes\PlayerCube.cpp" />
     <ClCompile Include="App.xaml.cpp">
       <DependentUpon>App.xaml</DependentUpon>
     </ClCompile>
