@@ -20,10 +20,11 @@ bool Background::init()
 		_backgrounds[i] = Sprite::createWithTexture(backgroundTexture, Rect(Vec2::ZERO, Size(size.width * 2.0f, size.height)));
 		_backgrounds[i]->setAnchorPoint(Vec2::ZERO);
 		_backgrounds[i]->setPosition(Vec2(origin.x + i * size.width * 2.0f, origin.y));
-		_backgrounds[i]->setColor(Color3B(10, 10, 10));
+		_backgrounds[i]->setColor(Color3B(7, 107, 154));
 		addChild(_backgrounds[i], -20 + i);
 	}
-	Color3B rowColor[3] = { Color3B(80, 80, 80), Color3B(50, 50, 50), Color3B(30, 30, 30) };
+	Color3B rowColor[3] = { Color3B(18, 111, 5), Color3B(12, 77, 4), Color3B(8, 51, 2) };
+	Color3B rowAltColor[3] = { Color3B(142, 153, 15), Color3B(105, 113, 11), Color3B(71, 77, 7) };
 	float rowHeight[3] = { 150.0f, 200.0f, 250.0f };
 	float rowScale[3] = { 0.75f, 0.5f, 0.25f };
 	for (int i = 0; i < 3; ++i)
@@ -32,7 +33,8 @@ bool Background::init()
 		{
 			_rows[i].buildings[j] = Sprite::create("textures/building.png");
 			_rows[i].buildings[j]->setAnchorPoint(Vec2::ZERO);
-			_rows[i].buildings[j]->setColor(rowColor[i]);
+			Color3B color = RandomHelper::random_int<int>(0, 1) == 0 ? rowColor[i] : rowAltColor[i];
+			_rows[i].buildings[j]->setColor(color);
 			float lastPosition = 0.0f;
 			if (j > 0)
 			{
